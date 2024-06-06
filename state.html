@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Protect My District | Cyber Incident Map</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="content">
+      <header>
+        <div class="logo">
+          <img
+            src="images/logo2.png"
+            width="140"
+            height="110"
+            alt="Cyber Security Logo"
+          />
+          <img
+            src="images/protect-my-district-alpha.png"
+            width="180"
+            height="90"
+            alt="Protect My District Logo"
+          />
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="state.html">Cyber Incident Map</a></li>
+            <li><a href="lookup.html">District Lookup</a></li>
+            <li><a href="case.html">Case Study</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main class="home-grid-map">
+        <p class="headline">
+          Map of Cybersecurity Incidents in US K-12 Districts
+        </p>
+        <h3>
+          Hover over a state to see a count of cyber incidents that have
+          occurred in that state between 2016 and 2020.
+        </h3>
+        <div id="rendered-data">
+          <div>
+            <svg id="chart"></svg>
+            <div id="tooltip"></div>
+          </div>
+          <table id="legend">
+            <caption id="legend-caption">
+              Incident Counts
+            </caption>
+            <tbody></tbody>
+          </table>
+          <table id="top-10">
+            <caption id="table-caption">
+              Top 10 States With Highest Count of Cyber Incidents
+            </caption>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>State</th>
+                <th>Incident Count</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <section class="map-information">
+          <p class="map-paragraph-1"></p>
+          <p class="map-paragraph-2"></p>
+          <p class="map-paragraph-3"></p>
+          <p class="map-paragraph-4"></p>
+        </section>
+      </main>
+      <select id="gameDropdown"></select>
+      <div id="tooltip"></div>
+      <script type="text/javascript" src="lib/d3.v5.min.js"></script>
+      <script type="text/javascript" src="lib/d3-dsv.min.js"></script>
+      <script type="text/javascript" src="lib/d3-tip.min.js"></script>
+      <script type="text/javascript" src="lib/topojson.v2.min.js"></script>
+      <script src="main.js"></script>
+      <footer>
+        <p>&copy; 2024 Protect My District - Shayla Nelson - MGT 6748</p>
+      </footer>
+    </div>
+  </body>
+</html>
