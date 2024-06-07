@@ -6,28 +6,137 @@ const svg = d3.select("#chart");
 const svgChartEl = document.getElementById("chart");
 const resultsBtn = document.getElementById("results-button");
 
-// enter code to define margin and dimensions for svg
 const margin = { top: 50, right: 200, bottom: 50, left: 50 },
   width = window.innerWidth - margin.left - margin.right,
   height = window.innerHeight - margin.top - margin.bottom;
 const w = width - margin.right - margin.left;
 const h = height - margin.top - margin.bottom;
 
-// enter code to define projection and path required for Choropleth
 const projection = d3.geoNaturalEarth1();
-const path = d3.geoPath().projection(projection);
+const path = d3.geoPath(); //.projection(projection);
 
-const states = d3.json("world_countries.json");
-const mapData = d3.csv("maps.csv");
+const states = d3.json("https://d3js.org/us-10m.v2.json");
+const stateData = d3.csv("states.csv");
 
-Promise.all([states, mapData]).then(function (values) {
-  // enter code to call ready() with required arguments
+const incidentsDomain = [5, 15, 25, 40, 50, 100, "200+"];
+const studentsDomain = [5, 15, 25, 40, 50, 100, 200];
+const duplicatedStudentsDomain = [5, 15, 25, 40, 50, 100, 200];
+
+Promise.all([states, stateData]).then(function (values) {
   ready(null, values[0], values[1]);
 });
 
-/*
+function ready(error, states, stateData) {
+  const uniqueStates = stateData.reduce((stateList, current) => {
+    return stateList.add(current.State_Name);
+  }, new Set([]));
+  createMapAndLegend(states, stateData, incidentsDomain);
+  //createMapAndLegend(states, stateData, studentsDomain);
+  //createMapAndLegend(states, stateData, duplicatedStudentsDomain);
+
+  function createSvg() {
+    const svg = d3
+      .select("#chart")
+      .append("svg")
+      .attr("id", "choropleth")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom);
+
+    return svg;
+  }
+
+  function clearSvg() {
+    document.getElementById("choropleth")?.remove();
+  }
+
+  function createMapAndLegend(states, stateData, colorDomain) {
+    const dataLookup = stateData.reduce((map, item) => {
+      map[item.State_Name] = {
+        incidents: item["Incident Count"],
+        studentsDuplicated: item["Total_Students_Duplicated"],
+        studentsUnduplicated: item["Total_Students"],
+      };
+      return map;
+    }, {});
+    const colors = [
+      "#07F49E",
+      "#11CC99",
+      "#1BA493",
+      "#257C8E",
+      "#2E5489",
+      "#382C83",
+      "#42047E",
+    ];
+    const colorScale = d3
+      .scaleThreshold()
+      .domain(colorDomain)
+      //.scaleQuantile()
+      //.domain(stateData.map((d) => d["Incident Count"]))
+      .range(colors);
+    clearSvg();
+    const svg = createSvg();
+    const stateContainer = svg.append("g").attr("id", "states");
+    const data = topojson.feature(states, states.objects.states).features;
+    stateContainer
+      .selectAll("path")
+      .data(data)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr("fill", function (d) {
+        const stateName = d.properties.name.toUpperCase();
+        if (dataLookup[stateName]) {
+          return colorScale(dataLookup[stateName].incidents);
+        }
+        return "gray";
+      })
+      .on("mousemove", function handleMouseOver(d) {
+        const [x, y] = d3.mouse(this);
+        const stateName = d.properties.name.toUpperCase();
+        const data = dataLookup[stateName] || {
+          incidents: "N/A",
+        };
+        const tooltip = document.getElementById("tooltip");
+        tooltip.innerHTML = `<div>
+       <strong></strong>${d.properties.name}<br />
+       <strong>Incidents: </strong>${data.incidents}<br />
+       </div>`;
+        tooltip.style.top = `${y + 20}px`;
+        tooltip.style.left = `${x + 20}px`;
+        tooltip.style.display = "block";
+      })
+      .on("mouseout", function handleMouseOut(d) {
+        const tooltip = document.getElementById("tooltip");
+        tooltip.style.display = "none";
+        tooltip.innerHTML = "";
+      });
+
+    const legend = svg.append("g").attr("id", "legend");
+
+    colors.forEach((c, idx) => {
+      legend
+        .append("text")
+        .text(
+          colorScale
+            .invertExtent(c)
+            .map((x) => x || 0)
+            .join("-")
+        )
+        .attr("x", width + 150)
+        .attr("y", 30 + idx * 20);
+
+      legend
+        .append("rect")
+        .attr("width", 10)
+        .attr("height", 10)
+        .attr("x", width + 130)
+        .attr("y", 20 + idx * 20)
+        .attr("fill", c);
+    });
+  }
+  /*
 d3.json("https://d3js.org/us-10m.v2.json").then(async function (usData) {
-  const incidents = await d3.csv("maps.csv");
+  const stateData = await d3.csv("states.csv");
 });
 
   function drawState(selectedStateId, coefs) {
@@ -251,6 +360,14 @@ d3.json("https://d3js.org/us-10m.v2.json").then(async function (usData) {
   renderData();
 });
 
+
+
+
+
+
+
+
+/*Q5
 // enter code to define margin and dimensions for svg
 const margin = { top: 50, right: 200, bottom: 50, left: 50 },
   width = window.innerWidth - margin.left - margin.right,
@@ -264,21 +381,21 @@ const projection = d3.geoNaturalEarth1();
 const path = d3.geoPath().projection(projection);
 
 // define any other global variables
-const states = d3.json("world_countries.json");
-const mapData = d3.csv("maps.csv");
+const world = d3.json("world_countries.json");
+const gameData = d3.csv("ratings-by-country.csv");
 
-Promise.all([world, mapData]).then(function (values) {
+Promise.all([world, gameData]).then(function (values) {
   // enter code to call ready() with required arguments
   ready(null, values[0], values[1]);
 });
 
 // this function should be called once the data from files have been read
 // world: topojson from world_countries.json
-// mapData: data from ratings-by-country.csv
+// gameData: data from ratings-by-country.csv
 
-function ready(error, world, mapData) {
-  // enter code to extract all unique games from mapData
-  const uniqueGames = mapData.reduce((gameList, current) => {
+function ready(error, world, gameData) {
+  // enter code to extract all unique games from gameData
+  const uniqueGames = gameData.reduce((gameList, current) => {
     return gameList.add(current.Game);
   }, new Set([]));
 
@@ -297,10 +414,10 @@ function ready(error, world, mapData) {
     });
   // event listener for the dropdown. Update choropleth and legend when selection changes. Call createMapAndLegend() with required arguments.
   gameDropdown.addEventListener("change", (evt) => {
-    createMapAndLegend(world, mapData, evt.currentTarget.value);
+    createMapAndLegend(world, gameData, evt.currentTarget.value);
   });
   // create Choropleth with default option. Call createMapAndLegend() with required arguments.
-  createMapAndLegend(world, mapData, gameDropdown.value);
+  createMapAndLegend(world, gameData, gameDropdown.value);
 }
 
 function createSvg() {
@@ -319,13 +436,13 @@ function clearSvg() {
   document.getElementById("choropleth")?.remove();
 }
 
-// this function should create a Choropleth and legend using the world and mapData arguments for a selectedGame
+// this function should create a Choropleth and legend using the world and gameData arguments for a selectedGame
 // also use this function to update Choropleth and legend when a different game is selected from the dropdown
-function createMapAndLegend(world, mapData, selectedGame) {
-  const filtermapData = mapData.filter((x) => {
+function createMapAndLegend(world, gameData, selectedGame) {
+  const filterGameData = gameData.filter((x) => {
     return x.Game === selectedGame;
   });
-  const dataLookup = filtermapData.reduce((map, item) => {
+  const dataLookup = filterGameData.reduce((map, item) => {
     map[item.Country] = {
       rating: item["Average Rating"],
       users: item["Number of Users"],
@@ -335,7 +452,7 @@ function createMapAndLegend(world, mapData, selectedGame) {
   const colors = ["#238b45", "#74c476", "#bae4b3", "#edf8e9"].reverse();
   const colorScale = d3
     .scaleQuantile()
-    .domain(filtermapData.map((d) => d["Average Rating"]))
+    .domain(filterGameData.map((d) => d["Average Rating"]))
     .range(colors);
   clearSvg();
   const svg = createSvg();
@@ -397,4 +514,6 @@ function createMapAndLegend(world, mapData, selectedGame) {
       .attr("y", 20 + idx * 20)
       .attr("fill", c);
   });
-}*/
+}
+*/
+}

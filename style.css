@@ -168,6 +168,11 @@ div.c {
   color: black;
 }
 
+path {
+  stroke: white;
+  stroke-width: 0.5px;
+}
+
 #chart {
   display: block;
   padding-top: 50px;
@@ -210,7 +215,7 @@ td {
 }
 
 #table-caption {
-  color: #fdfffc;
+  color: #011627;
   font-family: Cabin;
   font-size: 24px;
   padding: 20px;
@@ -218,7 +223,7 @@ td {
 }
 
 #legend-caption {
-  color: #fdfffc;
+  color: #011627;
   font-family: Cabin;
   font-size: 21px;
   padding: 20px;
