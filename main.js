@@ -4,7 +4,7 @@ const width = 700;*/
 const svg = d3.select("#chart");
 
 const svgChartEl = document.getElementById("chart");
-const resultsBtn = document.getElementById("results-button");
+//const resultsBtn = document.getElementById("results-button");
 
 const margin = { top: 50, right: 200, bottom: 50, left: 50 },
   width = window.innerWidth - margin.left - margin.right,
@@ -52,7 +52,7 @@ function ready(error, states, stateData) {
   function createMapAndLegend(states, stateData, colorDomain) {
     const dataLookup = stateData.reduce((map, item) => {
       map[item.State_Name] = {
-        incidents: item["Incident Count"],
+        incidents: item["Incident_Count"],
         studentsDuplicated: item["Total_Students_Duplicated"],
         studentsUnduplicated: item["Total_Students"],
       };
@@ -99,10 +99,10 @@ function ready(error, states, stateData) {
         const tooltip = document.getElementById("tooltip");
         tooltip.innerHTML = `<div>
        <strong></strong>${d.properties.name}<br />
-       <strong>Incidents: </strong>${data.incidents}<br />
+       <font size="-1"><strong>Incidents: </strong>${data.incidents}</font><br />
        </div>`;
-        tooltip.style.top = `${y + 20}px`;
-        tooltip.style.left = `${x + 20}px`;
+        tooltip.style.top = `${y + 200}px`;
+        tooltip.style.left = `${x + 10}px`;
         tooltip.style.display = "block";
       })
       .on("mouseout", function handleMouseOut(d) {

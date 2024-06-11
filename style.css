@@ -82,19 +82,7 @@ p {
   padding: 10px;
   margin: 2px 0 2px 0;
 }
-
-div.a {
-  grid-column: 1 / 2;
-}
-
-div.b {
-  grid-column: 2 / 3;
-}
-
-div.c {
-  grid-column: 3 / 4;
-}
-
+/*
 .home-a-img,
 .home-b-img,
 .home-c-img {
@@ -125,7 +113,18 @@ div.c {
 .home-paragraph-3 {
   grid-column: 1 / 4;
 }
+*/
+h3 {
+  margin-top: 30px;
+  text-align: center;
+}
 
+#disclaimer {
+  margin-top: -15px;
+  font-size: 14px;
+  text-align: center;
+}
+/*
 #results-button {
   border: none;
   background-color: #011627;
@@ -165,7 +164,18 @@ div.c {
 
 #results-button:hover {
   background-color: white;
-  color: black;
+  color: 011627;
+}
+*/
+
+#rendered-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+  padding: 40px;
+  gap: 60px;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 path {
@@ -175,37 +185,20 @@ path {
 
 #chart {
   display: block;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  margin-top: -20px;
 }
 
-.county-borders {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 0.5px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  pointer-events: none;
-}
-
-.counties :hover {
-  fill: #011627;
+#states :hover {
+  fill-opacity: 0.6;
 }
 
 table,
 th,
 td {
-  background-color: white;
-  border: 1px solid black;
+  background-color: #42047e;
+  color: white;
+  border: 1px solid 011627;
   padding: 5px;
-}
-
-#rendered-data {
-  display: flex;
-  padding: 40px;
-  gap: 60px;
-  justify-content: space-around;
-  align-items: flex-start;
 }
 
 #top-10 {
@@ -235,41 +228,9 @@ td {
   background-color: #011627;
   color: white;
   position: absolute;
-  z-index: 10;
+  z-index: 20;
   padding: 16px;
-  border-radius: 8px;
-}
-
-.line {
-  fill: none;
-  stroke: #ffab00;
-  stroke-width: 3;
-}
-
-.overlay {
-  fill: none;
-  pointer-events: all;
-}
-
-/* Style the dots by assigning a fill and stroke */
-.dot {
-  fill: #ffab00;
-  stroke: #fff;
-}
-
-.focus circle {
-  fill: none;
-  stroke: steelblue;
-}
-
-#tooltip {
-  display: none;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  position: absolute;
-  z-index: 10;
-  padding: 16px;
-  border-radius: 8px;
+  border-radius: 5px;
 }
 
 footer {
@@ -293,7 +254,7 @@ p {
   grid-template-columns: 1fr 1fr;
   grid-gap: 1em;
 }
-
+/*
 .class-info-headline {
   color: #fdfffc;
   background-color: #2ec4b6;
