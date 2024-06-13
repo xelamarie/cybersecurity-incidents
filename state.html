@@ -26,7 +26,8 @@
         <nav>
           <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="state.html">Cyber Incident Map</a></li>
+            <li><a href="stats.html">Quick Stats</a></li>
+            <li><a href="state.html">Interactive Map</a></li>
             <li><a href="lookup.html">District Lookup</a></li>
             <li><a href="case.html">Case Study</a></li>
             <li><a href="about.html">About</a></li>
@@ -42,22 +43,16 @@
           Hover over a state to see a count of reported* cyber incidents that
           have occurred in that state between 2016 and 2020.
         </h3>
-        <p id="disclaimer">
+        <p class="disclaimer">
           (*Each state has their own laws regarding cybersecurity incident
-          discolsure requirements. As such, this represents reported counts and
-          may not reflect the true count of cyber incidents.)
+          disclosure requirements. As such, this represents reported counts and
+          may not reflect the true occurance of cyber incidents.)
         </p>
         <div id="rendered-data">
           <div>
             <div id="chart"></div>
             <div id="tooltip"></div>
           </div>
-          <!--<table id="legend">
-            <caption id="legend-caption">
-              Number of Incidents
-            </caption>
-            <tbody></tbody>
-          </table>-->
           <table id="top-10">
             <caption id="table-caption">
               Top 10 States With Highest Count of Cyber Incidents

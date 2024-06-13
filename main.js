@@ -39,8 +39,7 @@ function ready(error, states, stateData) {
       .select("#chart")
       .append("svg")
       .attr("id", "choropleth")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom);
+      .attr("viewBox", "0 0 1080 680");
 
     return svg;
   }
@@ -113,6 +112,15 @@ function ready(error, states, stateData) {
 
     const legend = svg.append("g").attr("id", "legend");
 
+    const legendX = width - 300;
+    const legendY = 430;
+
+    legend
+      .append("text")
+      .text("Incident Count")
+      .attr("x", legendX)
+      .attr("y", legendY - 30);
+
     colors.forEach((c, idx) => {
       legend
         .append("text")
@@ -122,16 +130,45 @@ function ready(error, states, stateData) {
             .map((x) => x || 0)
             .join("-")
         )
-        .attr("x", width + 150)
-        .attr("y", 30 + idx * 20);
+        .attr("x", legendX + 20)
+        .attr("y", legendY + idx * 20);
 
       legend
         .append("rect")
         .attr("width", 10)
         .attr("height", 10)
-        .attr("x", width + 130)
-        .attr("y", 20 + idx * 20)
+        .attr("x", legendX)
+        .attr("y", legendY - 12 + idx * 20)
         .attr("fill", c);
+    });
+    updateTable(stateData);
+  }
+
+  function updateTable(stateData) {
+    const sorted = stateData.sort(
+      (a, b) => b.Incident_Count - a.Incident_Count
+    );
+    const limited = sorted.slice(0, 10);
+    const tableBody = document.querySelector("#top-10 > tbody");
+    tableBody.innerHTML = "";
+    limited.forEach((x, idx) => {
+      console.log(x);
+      const row = document.createElement("tr");
+
+      const rankCol = document.createElement("td");
+      rankCol.innerHTML = idx + 1;
+      row.appendChild(rankCol);
+
+      const nameCol = document.createElement("td");
+      nameCol.className = "state-name";
+      nameCol.innerHTML = x.State_Name.toLowerCase();
+      row.appendChild(nameCol);
+
+      const probCol = document.createElement("td");
+      probCol.innerHTML = x.Incident_Count;
+      row.appendChild(probCol);
+
+      tableBody.appendChild(row);
     });
   }
   /*
