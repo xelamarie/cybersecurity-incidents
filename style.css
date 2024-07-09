@@ -88,7 +88,12 @@ nav a:hover {
   padding: 15px;
 }
 
-.home-img,
+.home-img {
+  width: 100%;
+  padding: 4px;
+  border-radius: 10px;
+}
+
 .stats-img {
   width: 100%;
   padding: 4px;
@@ -108,7 +113,30 @@ h3 {
 
 .disclaimer {
   margin-top: -15px;
-  font-size: 14px;
+  font-size: 16px;
+  text-align: center;
+}
+
+#selection {
+  margin: 0 auto;
+  border: none;
+  background-color: #1ba493;
+  opacity: 90%;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
+  width: 390px;
+}
+
+#measure-select {
+  margin: 10px 5px;
+  font-size: 18px;
+  width: 380px;
+  padding: 5px;
   text-align: center;
 }
 
@@ -144,9 +172,8 @@ svg {
 table,
 th,
 td {
-  background-color: #42047e;
+  background-color: #382c83;
   color: white;
-  border: 1px solid 011627;
   padding: 5px;
 }
 
@@ -162,8 +189,7 @@ td {
 
 #table-caption {
   color: #011627;
-  font-family: Cabin;
-  font-size: 24px;
+  font-size: 18px;
   padding: 20px;
   margin: 2px 0px 2px 0px;
 }
@@ -181,9 +207,10 @@ td {
   background-color: #011627;
   color: white;
   position: absolute;
-  z-index: 20;
   padding: 16px;
   border-radius: 5px;
+  margin-left: 20px;
+  margin-top: 160px;
 }
 
 footer {
@@ -202,191 +229,110 @@ p {
   padding-left: 20px;
 }
 
-/*
-.home-bottom-img {
-  grid-column: 1 / 4;
-  width: 100%;
-  width: 100%;
-  border: 1px solid #ccc;
-  padding: 8px;
-  box-sizing: border-box;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+#lookup-info {
+  display: flex;
 }
 
-.home-paragraph-3 {
-  grid-column: 1 / 4;
-}
-
-#results-button {
+#state-selection {
+  margin: 0 auto;
   border: none;
-  background-color: #011627;
+  background-color: #1ba493;
+  opacity: 90%;
   color: white;
   padding: 15px;
   text-align: center;
   border-radius: 10px;
-  font-size: 24px;
-  cursor: pointer;
-  width: 260px;
-  display: block;
-  margin: auto;
-  margin-top: 30px;
-  transition-duration: 0.2s;
-}
-
-#results-button:hover {
-  background-color: white;
-  color: black;
-}
-
-#results-button {
-  border: none;
-  background-color: #011627;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  border-radius: 10px;
-  font-size: 24px;
-  cursor: pointer;
-  width: 260px;
-  display: block;
-  margin: auto;
-  margin-top: 30px;
-  transition-duration: 0.2s;
-}
-
-#results-button:hover {
-  background-color: white;
-  color: 011627;
-}
-*/
-
-/*
-.class-info-headline {
-  color: #fdfffc;
-  background-color: #2ec4b6;
-  font-family: "Montserrat", Garamond, sans-serif;
-  padding: 10px 15px;
-  margin: -2px 0 -12px 0;
-  grid-column: 1 / 4;
-  grid-row: 1 / 2;
-}
-
-.class-information {
-  grid-column: 1 / 2;
-  padding: 10px 20px;
-  font-size: 22px;
-}
-
-.class-img-1,
-.class-img-2,
-.class-img-3 {
-  width: 100%;
-  border: 1px solid #ccc;
-  padding: 4px;
-  box-sizing: border-box;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
-}
-
-.class-img-1 {
-  grid-column: 2 / 3;
-}
-
-.class-extra-info {
-  grid-column: 1 / 2;
-}
-
-.class-img-2 {
-  margin: 0 0 -5px 20px;
-}
-
-.class-paragraph-5,
-.class-paragraph-6 {
-  border-color: #ff9f1c;
-  background: rgba(255, 159, 28, 0.2);
-  padding: 15px;
-}
-
-.class-paragraph-5 {
-  grid-column: 2 / 3;
   font-size: 20px;
-  margin: 0 -5px 50px 20px;
-}
-
-.class-paragraph-6 {
-  grid-row: 2 / 3;
-  font-size: 24px;
-  margin: -5px -5px 75px 20px;
-}
-
-.class-img-3 {
-  grid-column: 2 / 3;
-  margin: -10px 0 0 5px;
-}
-
-.class-register {
-  grid-column: 2 / 3;
-}
-
-.class-register-headline {
-  color: #fdfffc;
-  background-color: #2ec4b6;
-  font-family: "Montserrat", Garamond, sans-serif;
-  padding: 10px 15px;
-  margin: -2px 0 -12px 0;
-  grid-column: 3 / 4;
-}
-
-form {
-  margin-top: 24px;
-  font-size: 24px;
-}
-
-form input {
-  margin-bottom: 24px;
-}
-
-input {
-  width: 100px;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.block {
-  display: block;
-  width: 100%;
-  border: none;
-  color: #fdfffc;
-  background-color: #ff9f1c;
-  font-family: "Montserrat", Garamond, sans-serif;
-  margin: 14px 0 40px 0;
-  padding: 14px 28px;
-  font-size: 24px;
+  font-weight: 900;
   cursor: pointer;
+  width: 390px;
+}
+
+#state-select {
+  margin: 10px 5px;
+  font-size: 18px;
+  width: 380px;
+  padding: 5px;
   text-align: center;
 }
 
-.block:hover {
-  background-color: #2ec4b6;
-  color: #011627;
+#district-select {
+  margin: 10px 5px;
+  font-size: 18px;
+  width: 380px;
+  padding: 5px;
+  text-align: center;
 }
 
-/* Additional styling for About Us page */
-.home-grid-about h1 {
-  color: #fdfffc;
-  background-color: #2ec4b6;
-  font-family: "Montserrat", Garamond, sans-serif;
-  padding: 10px 15px;
-  margin: -2px 0 -12px 0;
-  grid-column: 1 / 3;
+#district-data {
+  list-style: none;
+}
+
+.list-element {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#district-output {
+  margin: 0 auto;
+  border: none;
+  background-color: white;
+  opacity: 90%;
+  color: #011627;
+  padding: 15px;
+  border-radius: 10px;
+  width: 390px;
+}
+
+#NAME,
+#CITY,
+#INCIDENTS,
+#SCHOOLS,
+#STUDENTS {
+  color: #42047e;
+  font-size: 16px;
+}
+
+.lookup-img {
+  margin: 0px 40px;
+  border-radius: 10px;
+  width: 390px;
+}
+
+.home-grid-case {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, auto);
+  grid-gap: 2em;
+}
+
+.text-content {
+  grid-column: 2 / 3;
+  grid-row: 2 / 5;
+  background: #382c83;
+  opacity: 80%;
+  color: white;
+  padding: 10px 30px;
+  margin-right: 20px;
+  align-self: flex-start;
+  border-radius: 10px;
+}
+
+#case-title {
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.bold {
+  color: #11cc99;
+  font-weight: 900;
+  font-size: 21px;
+}
+
+#sources {
+  font-size: 14px;
 }
 
 .home-grid-about {
@@ -396,25 +342,12 @@ select {
   grid-gap: 2em;
 }
 
-.about-img-1,
-.about-img-2 {
+.about-img {
   width: 100%;
-  border: 1px solid #ccc;
   padding: 4px;
-  box-sizing: border-box;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
   grid-column: 1 / 2;
   margin-left: 15px;
-}
-
-.text-content {
-  grid-column: 2 / 3;
-  grid-row: 2 / 5;
-  border-color: #ff9f1c;
-  background: rgba(255, 159, 28, 0.2);
-  padding: 10px 30px;
-  margin-right: 20px;
-  align-self: flex-start;
+  border-radius: 10px;
 }
 
 .about-us p {

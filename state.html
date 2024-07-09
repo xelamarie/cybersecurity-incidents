@@ -40,14 +40,26 @@
           Districts
         </p>
         <h3>
-          Hover over a state to see a count of reported* cyber incidents that
-          have occurred in that state between 2016 and 2020.
+          Select a measure and hover over individual states to see reported*
+          cyber incidents and impact between 2016 and 2020
         </h3>
         <p class="disclaimer">
           (*Each state has their own laws regarding cybersecurity incident
           disclosure requirements. As such, this represents reported counts and
           may not reflect the true occurance of cyber incidents.)
         </p>
+        <div id="selection">
+          <label>
+            View By:
+            <select id="measure-select">
+              <option value="Incident_Count">Count of Incidents</option>
+              <option value="% Schools Impacted">% of Schools Impacted</option>
+              <option value="% Students Impacted">
+                % of Students Impacted
+              </option>
+            </select>
+          </label>
+        </div>
         <div id="rendered-data">
           <div>
             <div id="chart"></div>
@@ -61,19 +73,21 @@
               <tr>
                 <th>Rank</th>
                 <th>State</th>
-                <th>Incident Count</th>
+                <th id="column-name">Incident Count</th>
               </tr>
             </thead>
             <tbody></tbody>
           </table>
         </div>
         <section class="map-information">
-          <p class="map-paragraph-1">Testing</p>
-          <p class="map-paragraph-2">Testing</p>
-          <p class="map-paragraph-3">Testing</p>
-          <p class="map-paragraph-4">Testing</p>
+          <p class="map-paragraph-1"></p>
         </section>
       </main>
+      <p id="sources">
+        Sources:
+        <br /><br />The K12 Cyber Incident Map — K12 SIX. (n.d.). K12 SIX.
+        https://www.k12six.org/map
+      </p>
       <script type="text/javascript" src="lib/d3.v5.min.js"></script>
       <script type="text/javascript" src="lib/d3-dsv.min.js"></script>
       <script type="text/javascript" src="lib/d3-tip.min.js"></script>
