@@ -2,12 +2,6 @@ const svg = d3.select("#chart");
 
 const svgChartEl = document.getElementById("chart");
 
-const margin = { top: 50, right: 200, bottom: 50, left: 50 },
-  width = window.innerWidth - margin.left - margin.right,
-  height = window.innerHeight - margin.top - margin.bottom;
-const w = width - margin.right - margin.left;
-const h = height - margin.top - margin.bottom;
-
 const projection = d3.geoNaturalEarth1();
 const path = d3.geoPath(); //.projection(projection);
 
@@ -115,6 +109,8 @@ function ready(error, states, stateData, measure) {
       })
       .on("mousemove", function handleMouseOver(d) {
         const [x, y] = d3.mouse(this);
+        const horizontalRatio = svgChartEl.offsetWidth / 1080;
+        const verticalRatio = svgChartEl.offsetHeight / 680;
         const stateName = d.properties.name.toUpperCase();
         const data = dataLookup[stateName] || {
           incidents: "N/A",
@@ -124,20 +120,23 @@ function ready(error, states, stateData, measure) {
        <strong></strong>${d.properties.name}<br />
        <font size="-1"><strong>${labels.tooltipLabel}: </strong>${data[measure]}</font><br />
        </div>`;
-        tooltip.style.top = `${y + 195}px`;
-        tooltip.style.left = `${x}px`;
+        tooltip.style.top = `${y * verticalRatio}px`;
+        tooltip.style.left = `${x * horizontalRatio}px`;
         tooltip.style.display = "block";
       })
       .on("mouseout", function handleMouseOut(d) {
-        const tooltip = document.getElementById("tooltip");
-        tooltip.style.display = "none";
-        tooltip.innerHTML = "";
+        //const tooltip = document.getElementById("tooltip");
+        //tooltip.style.display = "none";
+        //tooltip.innerHTML = "";
       });
 
     const legend = svg.append("g").attr("id", "legend");
 
-    const legendX = width - 350;
-    const legendY = 420;
+    const width = svgChartEl.offsetWidth;
+    const height = svgChartEl.offsetHeight;
+
+    const legendX = width + 150;
+    const legendY = height;
 
     legend
       .append("text")
