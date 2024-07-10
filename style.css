@@ -54,6 +54,10 @@ nav a:hover {
   color: #127ba1;
 }
 
+.selected-page a:visited {
+  color: #127ba1;
+}
+
 .relative-position {
   position: relative;
 }
