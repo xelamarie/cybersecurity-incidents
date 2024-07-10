@@ -93,6 +93,10 @@ function ready(error, states, stateData, measure) {
     clearSvg();
     const svg = createSvg();
     const stateContainer = svg.append("g").attr("id", "states");
+
+    const horizontalRatio = svgChartEl.offsetWidth / 1080;
+    const verticalRatio = svgChartEl.offsetHeight / 680;
+
     const data = topojson.feature(states, states.objects.states).features;
     stateContainer
       .selectAll("path")
@@ -109,8 +113,6 @@ function ready(error, states, stateData, measure) {
       })
       .on("mousemove", function handleMouseOver(d) {
         const [x, y] = d3.mouse(this);
-        const horizontalRatio = svgChartEl.offsetWidth / 1080;
-        const verticalRatio = svgChartEl.offsetHeight / 680;
         const stateName = d.properties.name.toUpperCase();
         const data = dataLookup[stateName] || {
           incidents: "N/A",
@@ -125,18 +127,15 @@ function ready(error, states, stateData, measure) {
         tooltip.style.display = "block";
       })
       .on("mouseout", function handleMouseOut(d) {
-        //const tooltip = document.getElementById("tooltip");
-        //tooltip.style.display = "none";
-        //tooltip.innerHTML = "";
+        const tooltip = document.getElementById("tooltip");
+        tooltip.style.display = "none";
+        tooltip.innerHTML = "";
       });
 
     const legend = svg.append("g").attr("id", "legend");
 
-    const width = svgChartEl.offsetWidth;
-    const height = svgChartEl.offsetHeight;
-
-    const legendX = width + 150;
-    const legendY = height;
+    const legendX = 1080 - 200;
+    const legendY = 680 - 250;
 
     legend
       .append("text")
